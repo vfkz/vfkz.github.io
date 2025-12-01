@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vfkz - Block-Based Coder Profile</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter font -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden; /* Prevent horizontal scroll due to floating elements */
+        }
+        /* Define custom keyframes for floating only */
+        @keyframes float-circle {
+            0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.8; }
+            50% { transform: translateY(-50px) translateX(20px) scale(1.2); opacity: 1; }
+        }
+        @keyframes float-triangle {
+            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg) scale(1); opacity: 0.7; }
+            50% { transform: translateY(60px) translateX(-30px) rotate(180deg) scale(0.9); opacity: 0.9; }
+        }
+
+        .floating-element {
+            position: absolute;
+            z-index: 0;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .floating-circle {
+            animation: float-circle 15s ease-in-out infinite alternate;
+        }
+
+        .floating-triangle {
+            animation: float-triangle 18s ease-in-out infinite alternate;
+        }
+
+        /* NEW MOBILE PHONE STYLES - 3D Visual */
+        #phone-container {
+            /* General container for 3D tilt */
+            position: relative;
+            transform: perspective(1000px) rotateX(10deg) rotateY(-10deg) rotateZ(5deg) scale(1.1);
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+        }
+        
+        .phone-body {
+            /* The main black frame of the phone */
+            width: 150px;
+            height: 300px;
+            background-color: #1F2937; /* Dark Grey Phone Body */
+            border-radius: 25px;
+            border: 5px solid #4B5563; /* Subtle border for depth */
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            /* Inner shadow for thickness effect */
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8), 0 0 15px rgba(0, 0, 0, 0.4);
+        }
+        
+        .phone-screen {
+            /* The screen area */
+            width: 100%;
+            height: 100%;
+            background-color: #000; /* Black screen background */
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-center: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .screen-text {
+            /* The green text on the screen */
+            color: #10B981; /* Green Text */
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: 'Monospace', monospace;
+            padding-top: 50%; /* Center the text vertically */
+        }
+        
+        /* Speaker and Camera Simulators */
+        .speaker-slot {
+            position: absolute;
+            top: 15px;
+            width: 30px;
+            height: 3px;
+            background-color: #4B5563;
+            border-radius: 1.5px;
+            z-index: 20;
+        }
+        
+        .camera-hole {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            width: 8px;
+            height: 8px;
+            background-color: #374151;
+            border-radius: 50%;
+            z-index: 20;
+        }
+        
+
+        /* Media query for responsiveness */
+        @media (max-width: 768px) {
+            .content-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            .text-block {
+                order: 2; /* Put text below phone on mobile */
+                width: 100%;
+            }
+            .visual-block {
+                order: 1;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 3rem;
+            }
+
+            /* Mobile Phone adjustments on smaller screens */
+            #phone-container {
+                 transform: perspective(1000px) rotateX(10deg) rotateY(-10deg) rotateZ(5deg) scale(0.8);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-800 text-gray-100 min-h-screen flex flex-col justify-center items-center p-4">
+
+    <!-- Floating Background Elements Container -->
+    <div id="floating-bg" class="absolute inset-0 overflow-hidden">
+        <!-- Green Circles -->
+        <div class="floating-element floating-circle bg-green-500 rounded-full w-12 h-12" style="top: 5%; left: 10%; animation-delay: 0s;"></div>
+        <div class="floating-element floating-circle bg-green-500 rounded-full w-8 h-8" style="top: 30%; left: 80%; animation-delay: 4s;"></div>
+        <div class="floating-element floating-circle bg-green-500 rounded-full w-16 h-16" style="top: 70%; left: 45%; animation-delay: 8s;"></div>
+        <div class="floating-element floating-circle bg-green-500 rounded-full w-10 h-10" style="top: 90%; left: 5%; animation-delay: 12s;"></div>
+        <!-- Blue Triangles (using CSS border trick) -->
+        <div class="floating-element floating-triangle" style="top: 15%; left: 60%; animation-delay: 2s; width: 0; height: 0; border-left: 25px solid transparent; border-right: 25px solid transparent; border-bottom: 50px solid #3B82F6;"></div>
+        <div class="floating-element floating-triangle" style="top: 55%; left: 15%; animation-delay: 6s; width: 0; height: 0; border-left: 30px solid transparent; border-right: 30px solid transparent; border-bottom: 60px solid #3B82F6;"></div>
+        <div class="floating-element floating-triangle" style="top: 80%; left: 75%; animation-delay: 10s; width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-bottom: 40px solid #3B82F6;"></div>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="content-container relative z-10 w-full max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center md:items-start p-6 rounded-xl shadow-2xl bg-gray-900/80 backdrop-blur-sm">
+
+        <!-- Left Side: Profile Text Block -->
+        <section class="text-block md:w-1/2 p-4 md:pr-8 space-y-4">
+            <h1 class="text-4xl font-extrabold text-green-400 mb-4 rounded-lg bg-gray-700/50 p-2 inline-block">
+                vfkz // Coder Profile
+            </h1>
+            <p class="text-lg leading-relaxed bg-gray-700 p-4 rounded-lg shadow-inner">
+                vfkz is a small block-based coder that often makes projects on mobile and in special occasions long projects on Personal Computers. The name "vfkz" started in 2020-2022 when he first wanted to study CyberSecurity, so he used 4 words as an annonymous name instead of his real name. Vfkz comes from Eastern Europe and is very active, his discord user being <span class="text-blue-400 font-mono">@vfkz_</span>. His block-based codes began in 2024, when one of his classmates introduced him to Scratch, a coding platform based on blocks which you stack to make actions, codes and different projects, and vfkz started coding, but then, his only computer broke, so he only had his mobile phone, so then he started using Pictoblox, a scratch alternative which used A.I. or Arduino to code. But that did not work out very well, because he was met up with various glitches that even with all of his iQ he couldnt figure out the glitches, so then he started using Octostudio, a mobile app that is made by MIT, a.k.a. the creators of Scratch. And he started studying bluetooth servers and connections and app developing. At the moment, the most he can do is make an RPG game in scratch, but the future will come soon!
+            </p>
+
+            <div class="mt-6">
+                <span class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium leading-none text-gray-900 bg-green-500 rounded-full shadow-lg">
+                    Current Focus: App Development
+                </span>
+            </div>
+        </section>
+
+        <!-- Right Side: Static Mobile Phone Visual -->
+        <section class="visual-block md:w-1/2 p-4 flex justify-center items-center">
+            <div id="phone-container">
+                <div class="phone-body">
+                    <div class="phone-screen">
+                        <!-- Speaker and Camera elements -->
+                        <div class="speaker-slot"></div>
+                        <div class="camera-hole"></div>
+                        <!-- Screen Text Updated -->
+                        <span class="screen-text">vfkz_</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.body.className += ' bg-gray-800';
+        
+        window.addEventListener('resize', () => {
+            console.log('Window resized. Layout adjusted by CSS media queries.');
+        });
+        
+        console.log("Welcome to vfkz's profile!");
+    </script>
+
+</body>
+</html>
